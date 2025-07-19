@@ -24,7 +24,6 @@ Use project;
 	JoinDate Date
 	);
 
-Update Customer 
 
 -- Insert data into Table
 
@@ -61,8 +60,8 @@ Insert INTO Orders values
 (107,5,'2024-04-28','Mouse',1,700),
 (108,3,'2024-05-02','Keyboard',1,1600);
 
-select * from Customer
-select * from Orders
+select * from Customer;
+select * from Orders;
 
 
 -- Part A : Basic Queries
@@ -85,31 +84,31 @@ select count(*)AS TotalOrders from Orders;
 --Total of 8 orders placed.
 
 --4.
-select * from Orders where Price Between 50000 and 80000;
---There are 3 customers whoe shopped between 50k to 80k.
+Select * from Orders where Price Between 50000 and 80000;
+--3 customers shopped between 50k to 80k.
 
 
-select * from Customer
-select * from Orders
+Select * from Customer
+Select * from Orders
 --Part B: Joins
 --4: Get the full name of customers and their products ordered.
 --5: Find customers who have not placed any orders.
 
 --4:
-select c.Firstname,+' '+ c.LastName AS FullName, o.Product
+Select c.Firstname,+' '+ c.LastName AS FullName, o.Product
 from Customer c
 Join Orders o ON c.CustomerID=o.CustomerID;
 
 --5:
-select c.CustomerID,o.orderid
+Select c.CustomerID,o.orderid
 from Customer c
 Join Orders o ON c.CustomerID = o.CustomerID
 Where o.OrderID is NULL
 
 
---Part C: Aggrefations
+--Part C: Aggregations
 --6: Find the total revenue earned from all orders.
---7: Find total quantity of Mouses sold.
+--7: Find the total quantity of Mouses sold.
 
 --6:
 select sum(Price)AS TotalRevenue from Orders;
@@ -135,18 +134,18 @@ from Customer c join Orders o ON c.CustomerID = o.CustomerID
 group by c.City;
 
 
-select * from Customer
-select * from Orders
+Select * from Customer
+Select * from Orders
 
 --Part E: Subquery & CASE
---10: Find customer who spent more than 50000 in total.
---11: Write a query to display each order with label :
+--10: Find the customer who spent more than 50000 in total.
+--11: Write a query to display each order with the label :
 --
 -- 'High Value' if price > 50000
 -- 'Low Value' otherwise
 
 --10:
-select C.* from customer C
+Select C.* from customer C
 where c.CustomerID IN
 (select CustomerID from Orders
 group by CustomerID
@@ -162,7 +161,7 @@ select OrderID, Price,
 From Orders;
 
 
---Part F:Window Functions
+--Part F: Window Functions
 --12:Find the running total of revenue by order date.
 
 
@@ -181,7 +180,7 @@ Select
 	ROW_NUMBER() Over (PARTITION BY CustomerID ORDER BY OrderDate) AS RowNum
 From Orders;
 
---13A: Assign Row_Number to each customerID order by price
+--13A: Assign Row_Number to each customerID, order by price
 
 select 
 	CustomerID,
@@ -191,8 +190,6 @@ select
 From Orders;
 
 
-select * from Customer
-select * from Orders
 --14: Use RANK to rank orders by Price (Highest to Lowest)
 
 Select 
@@ -214,7 +211,7 @@ From Orders;
 
 
 --15: Use Dense_Rank to
---Rank orders by Price (Highest-Lowest) - Explain diff with Rank.
+--Rank orders by Price (Highest-Lowest) - Explain the difference with Rank.
 
 
 UPDATE Orders
