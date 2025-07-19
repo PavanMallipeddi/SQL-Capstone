@@ -1,17 +1,20 @@
 
 
-------- scenario ------
+                                 ------- Scenario ------
 --You are hired as a junior Data analyst for a retail company
 --that sells electronics & accessories.
 --Your manager wants you to analyze sales and customer data using SQL ssms.
 
-create database project
 
-use project;
+
+
+
+
+Create Database project
+
+Use project;
 
  -- create customer table
-
- drop table Customer;
 
  Create Table Customer (
 	CustomerID INT Primary Key,
