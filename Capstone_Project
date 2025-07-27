@@ -145,30 +145,30 @@ Select * from Orders
 -- 'Low Value' otherwise
 
 --10:
-Select C.* from customer C
-where c.CustomerID IN
-(select CustomerID from Orders
-group by CustomerID
-Having sum(price) > 50000 );
+Select C.* from customer C 
+Where c.CustomerID IN (select CustomerID from Orders 
+Group by CustomerID 
+Having sum(price) > 50000 ); 
 
 
 --11:
-select OrderID, Price,
-	CASE
-		When Price > 50000 Then 'High Value'
-		Else 'Low Value'
-	End As ValueLabel
-From Orders;
+SELECT OrderID, Price, 
+       CASE 
+         WHEN Price > 50000 
+THEN 'High Value' 
+         ELSE 'Low Value' 
+       END AS ValueLabel 
+FROM Orders;
 
 
---Part F: Window Functions
+--Part E: Window Functions 
+ 
+12. Find the running total of revenue by order date.
 --12:Find the running total of revenue by order date.
 
-
-SELECT OrderID, Orderdate, Price,
-	sum(price) OVER (ORDER BY orderdate )AS RunningRevenue
-from Orders;
-
+SELECT OrderID, Orderdate, Price, 
+ sum(price) OVER (ORDER BY orderdate )AS RunningRevenue 
+from Orders; 
 
 --13: Assign a Row_Number to each order by CustomerID ordered by Orderdate(oldest first).
 
@@ -182,22 +182,23 @@ From Orders;
 
 --13A: Assign Row_Number to each customerID, order by price
 
-select 
-	CustomerID,
-	OrderID,
-	Price,
-	ROW_NUMBER() Over (PARTITION BY CustomerID ORDER BY Price) AS OrderPrice
-From Orders;
+select  
+ CustomerID, 
+ OrderID, 
+ Price, 
+ ROW_NUMBER() Over (PARTITION BY CustomerID ORDER BY Price) AS 
+OrderPrice 
+From Orders; 
 
 
 --14: Use RANK to rank orders by Price (Highest to Lowest)
 
-Select 
-	OrderID,
-	CustomerID,
-	Price,
-	Rank () Over (ORDER BY Price DESC) AS PriceRank
-From Orders;
+Select  
+ OrderID, 
+ CustomerID, 
+ Price, 
+       RANK() OVER (ORDER BY Price DESC) AS PriceRank 
+From Orders; 
 
 --14 A: Use RANK to rank orders by Quantity (Highest to Lowest)
 
@@ -228,9 +229,9 @@ FROM Orders;
 
 --16: Find customers who have placed more than 1 order using HAVING.
 
-SELECT 
-    CustomerID,
-    COUNT(OrderID) AS TotalOrders
-FROM Orders
-GROUP BY CustomerID
-HAVING COUNT(OrderID) > 1;
+SELECT  
+    CustomerID, 
+    COUNT(OrderID) AS TotalOrders 
+FROM Orders 
+GROUP BY CustomerID 
+HAVING COUNT(OrderID) > 1; 
